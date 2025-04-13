@@ -70,7 +70,7 @@ class TaskManager {
     // 2. Find all completed tasks
     public List<Task> getCompletedTasks() {
         // TODO: Implement logic to return completed tasks
-        return new ArrayList<>();
+        return tasks.stream().filter(Task::isCompleted).collect(Collectors.toList());
     }
 
     // 3. List tasks sorted by name
@@ -104,11 +104,22 @@ class TaskManager {
     // 8. Mark a task as completed by name
     public void markTaskCompleted(String name) {
         // TODO: Implement completion logic
+          for (Task task : tasks) {
+        if (task.getName().equalsIgnoreCase(name)) {
+            task.complete();
+            break; // Претпоставуваме дека името е уникатно
+        }
+    }
     }
 
     // 9. Mark all tasks in a category as completed
     public void markCategoryCompleted(String category) {
         // TODO: Implement bulk completion logic
+        for (Task task : tasks) {
+        if (task.getCategory().equalsIgnoreCase(category)) {
+            task.complete();
+        }
+    }
     }
 }
 
